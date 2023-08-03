@@ -1,0 +1,137 @@
+body {
+  box-sizing: border-box;
+}
+
+.header {
+  background-color: #4d4d4d;
+  display: flex;
+  height: 13vh;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10%;
+}
+
+.navbar_link {
+  text-decoration: none;
+  color: white;
+  margin-left: 20px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.fantasy {
+  font-family: fantasy;
+}
+
+.logo {
+  color: white;
+  font-size: 2.5vw;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  height: 10vh;
+  background-color: #4d4d4d;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.navbar {
+  height: 60px;
+  position: relative;
+}
+
+.logo {
+}
+
+.menu-icon {
+  display: none;
+}
+
+.nav-elements ul {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.nav-elements ul li:not(:last-child) {
+  margin-right: 60px;
+}
+
+@media (max-width: 768px) {
+  .nav-elements ul li:not(:last-child) {
+    margin-right: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .menu-icon {
+    display: block;
+    cursor: pointer;
+  }
+
+  .nav-elements {
+    position: absolute;
+    right: -20px;
+    top: 60px;
+    background-color: #4d4d4d;
+    width: 0px;
+    height: calc(100vh - 12vh);
+    transition: all 0.3s ease-in;
+    overflow: hidden;
+  }
+
+  .nav-elements.active {
+    width: 270px;
+  }
+
+  .nav-elements ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-elements ul li {
+    margin-right: unset;
+    margin-top: 22px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .logo {
+    font-size: 3.5vw;
+  }
+  .header {
+    height: 10vh;
+  }
+}
+
+@media screen and (max-width: 768px ) {
+  .logo {
+    font-size: 4vw;
+  }
+}
+
+@media screen and (max-width: 768px ) {
+  .logo {
+    font-size: 5.5vw;
+  }
+  .header {
+    height: 8vh;
+    padding: 0 20px;
+  }
+}
