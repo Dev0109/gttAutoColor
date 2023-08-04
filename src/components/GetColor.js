@@ -120,7 +120,7 @@ const GetColor = () => {
         // console.log(data);
         const allWithClass = data.from(
           document.getElementById("color-display-table")
-        );``
+        );
         console.log(allWithClass);
       })
       .catch((error) => {
