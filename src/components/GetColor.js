@@ -306,7 +306,7 @@ const GetColor = () => {
           {htmlData ? (
             <div dangerouslySetInnerHTML={{ __html: htmlData.outerHTML }} />
           ) : (
-            <div>Loading...</div>
+            <div></div>
           )}
         </div>
       </div>
