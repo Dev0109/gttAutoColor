@@ -170,9 +170,45 @@ body {
   border: 1px solid #000;
 }
 
+.spinners {
+  display: flex;
+  justify-content: center;
+}
+
 #color-display-table td.color-info {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
+}
+
+#color-display-table td.color-info span.color-code {
+  display: block;
+  font-size: 1.1em;
+  text-align: left;
+  width: 400px;
+}
+
+span {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#color-display-table td.color-info span.color-name {
+  display: block;
+  font-size: 1.2em;
+  text-align: left;
+}
+
+#color-display-table {
+  font-size: 0.8em;
+  width: 630px;
+  margin-bottom: 5px;
+  float: left;
 }
 
 @media (max-width: 768px) {

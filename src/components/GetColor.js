@@ -97,40 +97,6 @@ const GetColor = () => {
     setModel(target.value);
   };
 
-  // const handleSelectColor = () => {
-  //   fetch(`${baseURL}/api/selectColor`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ year: year, make: vehicle, model: model }),
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       return response.json(); // Parse the response as JSON
-  //     })
-  //     .then((data) => {
-  //       const parser = new DOMParser();
-  //       const doc = parser.parseFromString(data, "text/html");
-  //       const tagElement = doc.getElementById("color-display-table");
-  //       if (tagElement) {
-  //         const rows = Array.from(tagElement.getElementsByTagName("tr"));
-  //         const tableData = rows.map((row) =>
-  //           Array.from(row.getElementsByTagName("td")).map(
-  //             (cell) => cell.innerHTML
-  //           )
-  //         );
-
-  //         setHtmlData(tableData);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error:", error.message);
-  //     });
-  // };
-
   const handleSelectColor = () => {
     fetch(`${baseURL}/api/selectColor`, {
       method: "POST",
@@ -146,11 +112,12 @@ const GetColor = () => {
         return response.json();
       })
       .then((data) => {
+        const modifiedData = data.replace(/onclick="highlightRow\(\d+\);"/g, '');
         const parser = new DOMParser();
-        const doc = parser.parseFromString(data, "text/html");
-        console.log("doc", doc)
+        const doc = parser.parseFromString(modifiedData, "text/html");
+        console.log("doc", doc);
         const tableElement = doc.getElementById("color-display-table");
-        console.log("tableElement", tableElement)
+        console.log("tableElement", tableElement);
         setHtmlData(tableElement);
       })
       .catch((error) => {
@@ -184,6 +151,15 @@ const GetColor = () => {
           </div>
           <div className="text-center getColor_selectPart mt-4">
             <div className="getColor_start_text">Start Here</div>
+            <div className="spinners" style={{display: "none"}}>
+              <div class="spinner-grow text-muted"></div>
+              <div class="spinner-grow text-primary"></div>
+              <div class="spinner-grow text-success"></div>
+              <div class="spinner-grow text-info"></div>
+              <div class="spinner-grow text-warning"></div>
+              <div class="spinner-grow text-danger"></div>
+              <div class="spinner-grow text-secondary"></div>
+            </div>
             <div className="grid grid-cols-3 gap-4">
               <select
                 className="form_control"
@@ -302,21 +278,6 @@ const GetColor = () => {
               Find Your Color
             </Button>
           </div>
-          {/* {htmlData ? (
-            <table>
-              <tbody>
-                {htmlData.map((row, rowIndex) => (
-                  <tr key={rowIndex}>
-                    {row.map((cell, cellIndex) => (
-                      <td key={cellIndex}>{cell}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <div>Loading...</div>
-          )} */}
           {htmlData ? (
             <div dangerouslySetInnerHTML={{ __html: htmlData.outerHTML }} />
           ) : (
