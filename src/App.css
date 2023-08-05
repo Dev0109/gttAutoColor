@@ -156,6 +156,25 @@ body {
   border-radius: 5px;
 }
 
+#color-display-table .color-box {
+  width: 130px;
+  padding: 5px 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+#color-display-table .color-box span {
+  height: 36px;
+  display: block;
+  margin: 5px;
+  border: 1px solid #000;
+}
+
+#color-display-table td.color-info {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
 @media (max-width: 768px) {
   .nav-elements ul li:not(:last-child) {
     margin-right: 30px;

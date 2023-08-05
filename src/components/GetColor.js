@@ -6,10 +6,10 @@ import baseURL from "../config";
 const GetColor = () => {
   const [vehicles, setVehicles] = useState([]);
   const [models, setModels] = useState([]);
-  const [year, setYear] = useState("");
+  const [year, setYear] = useState("2020");
   const [vehicle, setVehicle] = useState("");
   const [model, setModel] = useState("[]");
-  const [colorTable, setColorTable] = useState("");
+  const [htmlData, setHtmlData] = useState([]);
 
   useEffect(() => {
     axios
@@ -55,7 +55,6 @@ const GetColor = () => {
         return response.json(); // Parse the response as JSON
       })
       .then((data) => {
-        console.log(data);
         const tags = data.split("<option value = ").slice(1);
         const tagValues = tags.map((tag) =>
           tag.split(">")[1].split("<")[0].trim()
@@ -83,7 +82,6 @@ const GetColor = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         const tags = data.split("<option value = ").slice(1);
         const tagValues = tags.map((tag) =>
           tag.split(">")[1].split("<")[0].trim()
@@ -99,10 +97,41 @@ const GetColor = () => {
     setModel(target.value);
   };
 
+  // const handleSelectColor = () => {
+  //   fetch(`${baseURL}/api/selectColor`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ year: year, make: vehicle, model: model }),
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       return response.json(); // Parse the response as JSON
+  //     })
+  //     .then((data) => {
+  //       const parser = new DOMParser();
+  //       const doc = parser.parseFromString(data, "text/html");
+  //       const tagElement = doc.getElementById("color-display-table");
+  //       if (tagElement) {
+  //         const rows = Array.from(tagElement.getElementsByTagName("tr"));
+  //         const tableData = rows.map((row) =>
+  //           Array.from(row.getElementsByTagName("td")).map(
+  //             (cell) => cell.innerHTML
+  //           )
+  //         );
+
+  //         setHtmlData(tableData);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error.message);
+  //     });
+  // };
+
   const handleSelectColor = () => {
-    console.log("year", year);
-    console.log("vehicle", vehicle);
-    console.log("model", model);
     fetch(`${baseURL}/api/selectColor`, {
       method: "POST",
       headers: {
@@ -114,14 +143,15 @@ const GetColor = () => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        return response.json(); // Parse the response as JSON
+        return response.json();
       })
       .then((data) => {
-        // console.log(data);
-        const allWithClass = data.from(
-          document.getElementById("color-display-table")
-        );
-        console.log(allWithClass);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(data, "text/html");
+        console.log("doc", doc)
+        const tableElement = doc.getElementById("color-display-table");
+        console.log("tableElement", tableElement)
+        setHtmlData(tableElement);
       })
       .catch((error) => {
         console.error("Error:", error.message);
@@ -272,6 +302,26 @@ const GetColor = () => {
               Find Your Color
             </Button>
           </div>
+          {/* {htmlData ? (
+            <table>
+              <tbody>
+                {htmlData.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {row.map((cell, cellIndex) => (
+                      <td key={cellIndex}>{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div>Loading...</div>
+          )} */}
+          {htmlData ? (
+            <div dangerouslySetInnerHTML={{ __html: htmlData.outerHTML }} />
+          ) : (
+            <div>Loading...</div>
+          )}
         </div>
       </div>
     </div>

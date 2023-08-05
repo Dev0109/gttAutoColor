@@ -31,11 +31,14 @@ app.post("/api/sendYear", (req, res) => {
 });
 
 app.post("/api/sendModel", (req, res) => {
-  const receiveModel = req.body.make;
+  const receiveVehicle = req.body.make;
   const receiveYear = req.body.year;
-  const data = new FormData();
-  data.append("year", receiveYear);
-  data.append("make", receiveModel);
+  var qs = require("qs");
+  var data = qs.stringify({
+    year: receiveYear,
+    make: receiveVehicle,
+  });
+  console.log("data", data)
 
   const config = {
     method: "post",
@@ -45,6 +48,7 @@ app.post("/api/sendModel", (req, res) => {
 
   axios(config)
     .then(function (response) {
+      console.log("123===>", response.data);
       res.json(response.data);
     })
     .catch(function (error) {
