@@ -115,9 +115,9 @@ const GetColor = () => {
         const modifiedData = data.replace(/onclick="highlightRow\(\d+\);"/g, '');
         const parser = new DOMParser();
         const doc = parser.parseFromString(modifiedData, "text/html");
-        console.log("doc", doc);
+        const inputs = doc.querySelectorAll("input");
+        inputs.forEach((input) => input.parentNode.removeChild(input));
         const tableElement = doc.getElementById("color-display-table");
-        console.log("tableElement", tableElement);
         setHtmlData(tableElement);
       })
       .catch((error) => {
@@ -152,13 +152,13 @@ const GetColor = () => {
           <div className="text-center getColor_selectPart mt-4">
             <div className="getColor_start_text">Start Here</div>
             <div className="spinners" style={{display: "none"}}>
-              <div class="spinner-grow text-muted"></div>
-              <div class="spinner-grow text-primary"></div>
-              <div class="spinner-grow text-success"></div>
-              <div class="spinner-grow text-info"></div>
-              <div class="spinner-grow text-warning"></div>
-              <div class="spinner-grow text-danger"></div>
-              <div class="spinner-grow text-secondary"></div>
+              <div className="spinner-grow text-muted"></div>
+              <div className="spinner-grow text-primary"></div>
+              <div className="spinner-grow text-success"></div>
+              <div className="spinner-grow text-info"></div>
+              <div className="spinner-grow text-warning"></div>
+              <div className="spinner-grow text-danger"></div>
+              <div className="spinner-grow text-secondary"></div>
             </div>
             <div className="grid grid-cols-3 gap-4">
               <select
