@@ -146,7 +146,6 @@ const GetColor = () => {
         const cells = doc.querySelectorAll(
           "td.color-info span.color-name"
         );
-        console.log(cells);
         cells.forEach((cell) => {
           cell.textContent = cell.textContent.replace(/\([^)]+\)/g, "").trim();
         });
