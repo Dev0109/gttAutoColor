@@ -10,6 +10,17 @@ const GetColor = () => {
   const [vehicle, setVehicle] = useState("");
   const [model, setModel] = useState("[]");
   const [htmlData, setHtmlData] = useState([]);
+  const [isShowSpinner, setIsShowSpinner] = useState(false);
+
+  const SpinnerStyle = {
+    visibility: isShowSpinner ? "visible" : "hidden",
+  };
+
+  const hideSpinner = () => {
+    setTimeout(() => {
+      setIsShowSpinner(false);
+    }, 2000);
+  }
 
   useEffect(() => {
     axios
@@ -39,6 +50,8 @@ const GetColor = () => {
   }, []);
 
   const handleYear = ({ target }) => {
+    setIsShowSpinner(true);
+    hideSpinner();
     setYear(target.value);
     fetch(`${baseURL}/api/sendYear`, {
       method: "POST",
@@ -67,6 +80,8 @@ const GetColor = () => {
   };
 
   const handleVehicle = ({ target }) => {
+    setIsShowSpinner(true);
+    hideSpinner();
     setVehicle(target.value);
     fetch(`${baseURL}/api/sendModel`, {
       method: "POST",
@@ -98,6 +113,8 @@ const GetColor = () => {
   };
 
   const handleSelectColor = () => {
+    setIsShowSpinner(true);
+    hideSpinner();
     fetch(`${baseURL}/api/selectColor`, {
       method: "POST",
       headers: {
@@ -112,11 +129,16 @@ const GetColor = () => {
         return response.json();
       })
       .then((data) => {
-        const modifiedData = data.replace(/onclick="highlightRow\(\d+\);"/g, '');
+        const modifiedData = data.replace(
+          /onclick="highlightRow\(\d+\);"/g,
+          ""
+        );
         const parser = new DOMParser();
         const doc = parser.parseFromString(modifiedData, "text/html");
         const inputs = doc.querySelectorAll("input");
         inputs.forEach((input) => input.parentNode.removeChild(input));
+        const hs = doc.querySelectorAll(".color-info[style='padding-bottom: 15px;']");
+        hs.forEach((h) => h.parentNode.removeChild(h));
         const tableElement = doc.getElementById("color-display-table");
         setHtmlData(tableElement);
       })
@@ -151,7 +173,7 @@ const GetColor = () => {
           </div>
           <div className="text-center getColor_selectPart mt-4">
             <div className="getColor_start_text">Start Here</div>
-            <div className="spinners" style={{display: "none"}}>
+            <div className="spinners" style={SpinnerStyle}>
               <div className="spinner-grow text-muted"></div>
               <div className="spinner-grow text-primary"></div>
               <div className="spinner-grow text-success"></div>
@@ -167,6 +189,7 @@ const GetColor = () => {
                 id="year"
                 onChange={handleYear}
                 defaultValue="2020"
+                disabled={isShowSpinner}
               >
                 <option value="">Select vehicle year...</option>
                 <option value="2024">2024</option>
@@ -250,6 +273,7 @@ const GetColor = () => {
                 name="vehicle"
                 id="vehicle"
                 onChange={handleVehicle}
+                disabled={isShowSpinner}
               >
                 {vehicles.map((vehicle) => {
                   return (
@@ -264,6 +288,7 @@ const GetColor = () => {
                 name="model"
                 id="model"
                 onChange={handleModel}
+                disabled={isShowSpinner}
               >
                 {models.map((model) => {
                   return (
