@@ -20,9 +20,11 @@ const GetColor = () => {
     setTimeout(() => {
       setIsShowSpinner(false);
     }, 2000);
-  }
+  };
 
   useEffect(() => {
+    setIsShowSpinner(true);
+    hideSpinner();
     axios
       .get(`${baseURL}/api/vehicle`)
       .then((response) => {
@@ -137,8 +139,17 @@ const GetColor = () => {
         const doc = parser.parseFromString(modifiedData, "text/html");
         const inputs = doc.querySelectorAll("input");
         inputs.forEach((input) => input.parentNode.removeChild(input));
-        const hs = doc.querySelectorAll(".color-info[style='padding-bottom: 15px;']");
+        const hs = doc.querySelectorAll(
+          ".color-info[style='padding-bottom: 15px;']"
+        );
         hs.forEach((h) => h.parentNode.removeChild(h));
+        const cells = doc.querySelectorAll(
+          "td.color-info span.color-name"
+        );
+        console.log(cells);
+        cells.forEach((cell) => {
+          cell.textContent = cell.textContent.replace(/\([^)]+\)/g, "").trim();
+        });
         const tableElement = doc.getElementById("color-display-table");
         setHtmlData(tableElement);
       })

@@ -38,7 +38,6 @@ app.post("/api/sendModel", (req, res) => {
     year: receiveYear,
     make: receiveVehicle,
   });
-  console.log("data", data)
 
   const config = {
     method: "post",
@@ -48,7 +47,6 @@ app.post("/api/sendModel", (req, res) => {
 
   axios(config)
     .then(function (response) {
-      console.log("123===>", response.data);
       res.json(response.data);
     })
     .catch(function (error) {
@@ -69,7 +67,6 @@ app.post("/api/selectColor", (req, res) => {
     year: receiveYear,
     make: receiveVehicle,
   });
-  console.log("data", data);
   var config = {
     method: "post",
     url: "https://www.paintscratch.com/cgi-bin/select-color.cgi",
