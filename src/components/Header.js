@@ -17,10 +17,10 @@ const Navbar = () => {
         <div className={`nav-elements  ${showNavbar && "active"}`}>
           <ul>
             <li>
-              <NavLink to="/" className="navbar_link">Home</NavLink>
+              <NavLink to="/" className="navbar_link" onClick={handleShowNavbar}>Home</NavLink>
             </li>
             <li>
-              <NavLink to="/gttautopaint" className="navbar_link">GetColor</NavLink>
+              <NavLink to="/gttautopaint" className="navbar_link" onClick={handleShowNavbar}>GetColor</NavLink>
             </li>
           </ul>
         </div>
