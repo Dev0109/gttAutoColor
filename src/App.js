@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<Home />}/>
         <Route path="gttautopaint" element={<GetColor />}/>
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
