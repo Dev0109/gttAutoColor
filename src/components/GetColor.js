@@ -19,7 +19,7 @@ const GetColor = () => {
   const hideSpinner = () => {
     setTimeout(() => {
       setIsShowSpinner(false);
-    }, 2000);
+    }, 1800);
   };
 
   useEffect(() => {
