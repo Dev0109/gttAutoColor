@@ -20,7 +20,10 @@ const Navbar = () => {
               <NavLink to="/" className="navbar_link" onClick={handleShowNavbar}>Home</NavLink>
             </li>
             <li>
-              <NavLink to="/gttautopaint" className="navbar_link" onClick={handleShowNavbar}>GetColor</NavLink>
+              <NavLink to="/gttautopaint" className="navbar_link" onClick={handleShowNavbar}>GTT ColorMap</NavLink>
+            </li>
+            <li>
+              <NavLink to="/products" className="navbar_link" onClick={handleShowNavbar}>Products</NavLink>
             </li>
           </ul>
         </div>
