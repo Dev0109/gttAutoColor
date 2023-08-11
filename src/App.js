@@ -6,6 +6,8 @@ import Home from './components/Home';
 import GetColor from './components/GetColor';
 import Footer from './components/Footer';
 import Products from './components/Products';
+import Product from './components/ProductDetail';
+
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />}/>
         <Route path="gttautopaint" element={<GetColor />}/>
         <Route path="products" element={<Products />}/>
+        <Route path="product/:id" element={<Product />}/>
       </Routes>
       {/* <Footer />s */}
     </div>

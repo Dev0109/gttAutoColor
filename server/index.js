@@ -1,13 +1,17 @@
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 const app = express();
 const port = 3001;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const axios = require("axios");
 const FormData = require("form-data");
+const products = require("./Product_details");
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 app.post("/api/sendYear", (req, res) => {
   const receiveYear = req.body.year;
@@ -126,6 +130,71 @@ app.get("/api/model", (req, res) => {
       res.status(500).send("Error occurred while fetching data");
     });
 });
+
+app.get("/api/products", (req, res) => {
+  res.json(products);
+});
+
+app.get("/api/products/id/:id", (req, res) => {
+  const product = products.details.find((x) => x.id == req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: "Product Not Found" });
+  }
+});
+
+app.get("/api/product/car/id/:id", (req, res) => {
+  const folderPath = `public/products/product${req.params.id}`;
+  console.log(folderPath);
+  fs.readdir(folderPath, (err, files) => {
+    console.log(err)
+    if (err) {
+      console.error(err);
+      return res.status(200).json({ error: "Failed to read folder contents" });
+    }
+
+    // Filter out only the filenames (excluding subdirectories)
+    const filenames = files.filter((file) => {
+      const filePath = path.join(folderPath, file);
+      return fs.statSync(filePath).isFile();
+    });
+    res.json({ filenames });
+  });
+});
+
+app.get('api/filenames/id/:id"', (req, res) => {
+  console.log(req.params.id);
+  const id = products.details.find((x) => x.id == req.params);
+  const folderPath = "path/to/folder"; // Specify the path to the folder
+
+  // Read the contents of the folder
+  fs.readdir(folderPath, (err, files) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Failed to read folder contents" });
+    }
+
+    // Filter out only the filenames (excluding subdirectories)
+    const filenames = files.filter((file) => {
+      const filePath = path.join(folderPath, file);
+      return fs.statSync(filePath).isFile();
+    });
+
+    res.json({ filenames });
+  });
+});
+
+// app.get('/products/product1.jpg', (req, res) => {
+//   // Read the image file from the file system
+//   const image = fs.readFileSync('/products/product1.jpg');
+
+//   // Encode the image data as Base64
+//   const base64Image = Buffer.from(image).toString('base64');
+
+//   // Include the encoded image data in the response
+//   res.json({ image: base64Image });
+// });
 
 // Start the server
 app.listen(port, () => {

@@ -167,7 +167,7 @@ const GetColor = () => {
           </h1>
         </div>
         <div className="getcolor_content">
-          <div className="grid grid-cols-2 gap-4">
+          {/* <div className="grid grid-cols-2 gap-4">
             <div className="...">
               <div className="text-2xl getcolor_text1_style">
                 PaintScratch sells original factory touch up paint for your car,
@@ -180,7 +180,7 @@ const GetColor = () => {
               </p>
             </div>
             <img src="./paint-car.jpg" alt="paiotCar" className="..." />
-          </div>
+          </div> */}
           <div className="text-center getColor_selectPart mt-4">
             <div className="getColor_start_text">Start Here</div>
             <div className="spinners" style={SpinnerStyle}>
