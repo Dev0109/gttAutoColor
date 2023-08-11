@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Image, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import baseURL from "../config";
@@ -16,7 +16,7 @@ const Products = () => {
     fetchData();
   }, []);
   return (
-    <div className="product_header">
+    <Form className="product_header">
       <Row className="product_content">
         {products.map((product, index) => {
           return (
@@ -30,18 +30,18 @@ const Products = () => {
               className="product_container"
             >
               <Link to={`/product/${product.id}`}>
-                <img
+                <Image
                   src={`${baseURL}${product.imageSrc}`}
                   alt={`product${product.id}`}
-                  className="product_image"
+                  className="product_image img-fluid rounded"
                 />
               </Link>
-              {product.name}
+              <strong>{product.name}</strong>
             </Col>
           );
         })}
       </Row>
-    </div>
+    </Form>
   );
 };
 

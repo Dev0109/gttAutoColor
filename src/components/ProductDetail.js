@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import baseURL from "../config";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Image, Form } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 
 const ProductDetail = () => {
@@ -39,7 +39,7 @@ const ProductDetail = () => {
         <Col lg={8} md={10} sm={10} xs={10} className="product_detail">
           <Row className="product_item">
             <Col md={6} sm={10} xs={10}>
-              <img
+              <Image
                 src={`${baseURL}${product.imageSrc}`}
                 className={isHovered ? "hovered" : ""}
                 onMouseEnter={handleMouseEnter}
@@ -47,20 +47,20 @@ const ProductDetail = () => {
               />
             </Col>
             <Col md={6} sm={10} xs={10}>
-              <div>
+              <Form>
                 <strong>{product.name}</strong>
-              </div>
-              <div>{product.description}</div>
+              </Form>
+              <Form>{product.description}</Form>
             </Col>
           </Row>
           {imageUrls && (
             <Carousel>
               {imageUrls.map((imageUrl, index) => (
                 <Carousel.Item className="slide" key={index}>
-                  <img
+                  <Image
                     src={`${baseURL}/products/product${product.id}/${imageUrl}`}
                     alt={`Image ${index + 1}`}
-                    className="car_image"
+                    className="car_image img-fluid rounded"
                   />
                 </Carousel.Item>
               ))}

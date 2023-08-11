@@ -1,8 +1,9 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
 
 const Home = () => {
     return(
-        <div>home</div>
+        <Form>home</Form>
     )
 };
 

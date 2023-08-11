@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import baseURL from "../config";
 
@@ -158,15 +158,15 @@ const GetColor = () => {
   };
 
   return (
-    <div className="getColor">
-      <div>
-        <div className="getcolor_header">
+    <Form className="getColor">
+      <Form>
+        <Form className="getcolor_header">
           {/* <img src="paintscratch-logo.jpg" alt="paintscratch" className="paintscratch"/> */}
           <h1 className="getcolor_header_text uppercase">
             Automotive touch up paint
           </h1>
-        </div>
-        <div className="getcolor_content">
+        </Form>
+        <Form className="getcolor_content">
           {/* <div className="grid grid-cols-2 gap-4">
             <div className="...">
               <div className="text-2xl getcolor_text1_style">
@@ -181,18 +181,18 @@ const GetColor = () => {
             </div>
             <img src="./paint-car.jpg" alt="paiotCar" className="..." />
           </div> */}
-          <div className="text-center getColor_selectPart mt-4">
-            <div className="getColor_start_text">Start Here</div>
-            <div className="spinners" style={SpinnerStyle}>
-              <div className="spinner-grow text-muted"></div>
-              <div className="spinner-grow text-primary"></div>
-              <div className="spinner-grow text-success"></div>
-              <div className="spinner-grow text-info"></div>
-              <div className="spinner-grow text-warning"></div>
-              <div className="spinner-grow text-danger"></div>
-              <div className="spinner-grow text-secondary"></div>
-            </div>
-            <div className="grid grid-cols-3 gap-4">
+          <Form className="text-center getColor_selectPart mt-4">
+            <Form className="getColor_start_text">Start Here</Form>
+            <Form className="spinners" style={SpinnerStyle}>
+              <Form className="spinner-grow text-muted"></Form>
+              <Form className="spinner-grow text-primary"></Form>
+              <Form className="spinner-grow text-success"></Form>
+              <Form className="spinner-grow text-info"></Form>
+              <Form className="spinner-grow text-warning"></Form>
+              <Form className="spinner-grow text-danger"></Form>
+              <Form className="spinner-grow text-secondary"></Form>
+            </Form>
+            <Form className="grid grid-cols-3 gap-4">
               <select
                 className="form_control"
                 name="year"
@@ -308,19 +308,19 @@ const GetColor = () => {
                   );
                 })}
               </select>
-            </div>
+            </Form>
             <Button className="findColorBtn" onClick={handleSelectColor}>
               Find Your Color
             </Button>
-          </div>
+          </Form>
           {htmlData ? (
-            <div dangerouslySetInnerHTML={{ __html: htmlData.outerHTML }} />
+            <Form dangerouslySetInnerHTML={{ __html: htmlData.outerHTML }} />
           ) : (
-            <div></div>
+            <Form></Form>
           )}
-        </div>
-      </div>
-    </div>
+        </Form>
+      </Form>
+    </Form>
   );
 };
 
